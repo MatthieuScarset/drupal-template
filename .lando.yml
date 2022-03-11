@@ -1,4 +1,8 @@
 name: drupal-template
 recipe: drupal9
-config:
-  webroot: web
+services:
+  appserver:
+    webroot: web
+    xdebug: debug
+    config:
+      php: .vscode/php.ini
