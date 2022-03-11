@@ -1,0 +1,11 @@
+name: Project theme
+type: theme
+base theme: stable
+description: 'A custom theme.'
+package: Custom
+version: VERSION
+core_version_requirement: ^8 || ^9
+hidden: false
+
+libraries:
+  - project/styles

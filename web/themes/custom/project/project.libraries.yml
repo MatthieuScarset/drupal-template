@@ -1,0 +1,11 @@
+styles:
+  version: VERSION
+  js:
+    js/project.js: {}
+  css:
+    component:
+      dist/project.css: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/once

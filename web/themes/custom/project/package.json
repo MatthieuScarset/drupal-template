@@ -1,0 +1,20 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "A custom theme.",
+  "author": {
+    "name": "Matthieu SCARSET",
+    "email": "m@matthieuscarset.com",
+    "url": "https://poulet.eth"
+  },
+  "license": "MIT",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "tailwindcss": "^3.0.23"
+  },
+  "scripts": {
+    "build": "tailwindcss -i ./src/project.css -o ./dist/project.css",
+    "watch": "tailwindcss -i ./src/project.css -o ./dist/project.css --watch"
+  }
+}

@@ -1,0 +1,20 @@
+uuid: e0ad6ba8-84a7-46e2-9b72-ae374e812625
+langcode: fr
+status: false
+dependencies: {  }
+id: local
+label: Local
+description: ''
+weight: 0
+folder: ../config/local
+module:
+  dblog: 0
+  devel: 0
+  kint: 0
+  views_ui: 0
+theme: {  }
+blacklist:
+  - system.performance
+graylist: null
+graylist_dependents: true
+graylist_skip_equal: true

@@ -1,0 +1,23 @@
+uuid: 2e4d1c27-31e1-4068-a26f-41504aac42af
+langcode: fr
+status: false
+dependencies: {  }
+id: prod
+label: Production
+description: ''
+weight: 0
+folder: ../config/prod
+module:
+  robotstxt: 0
+  redis: 0
+  s3fs: 0
+  syslog: 0
+theme: {  }
+blacklist:
+  - kline_geolocation.settings
+  - mon_projet_fenetre.configurator.settings
+  - system.file
+  - system.performance
+graylist: {  }
+graylist_dependents: true
+graylist_skip_equal: true
