@@ -53,7 +53,8 @@
         "pre-install-cmd": [
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion",
             "cp -n .env.example .env",
-            "cp -n web/sites/custom.settings.php web/sites/default/settings.php"
+            "cp -n web/sites/custom.settings.php web/sites/default/settings.php",
+            "echo $RANDOM | md5sum | head -c 20 > web/sites/default/salt.txt"
         ],
         "pre-update-cmd": [
             "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
