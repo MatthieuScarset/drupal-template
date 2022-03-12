@@ -13,15 +13,21 @@ Getting started:
 ```bash
 git clone <repo> myniceproject
 cd myniceproject
-lando start 
-lando composer install -o
-# Edit your project's name.
-# Ex: "name: myniceproject"
+
+# Edit project name in Lando file, example: "name: myniceproject"
 code .lando.yml
-# Edit DRUSH_OPTIONS_URI to match the custom project's name set above.
-# Ex: "DRUSH_OPTIONS_URI=https://myniceproject.lndo.site"
+
+# Edit .env file to match the new name set above, example: 
+# DRUSH_OPTIONS_URI=https://myniceproject.lndo.site
 code .env
-# Install Drupal with minimal configuration.
+
+# Start the project
+lando start 
+
+# Download dependencies
+lando composer install -o
+
+# Install Drupal
 lando drush si --existing-config -y
 ```
 
