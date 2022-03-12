@@ -80,6 +80,6 @@ $settings['config_exclude_modules'] = [
 ];
 
 // Local settings.
-if (file_exists($app_root . '/' . $,site_path . '/settings.local.php')) {
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
