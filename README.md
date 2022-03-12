@@ -17,15 +17,15 @@ cd myniceproject
 # Edit project name in Lando file, example: "name: myniceproject"
 code .lando.yml
 
-# Edit .env file to match the new name set above, example: 
-# DRUSH_OPTIONS_URI=https://myniceproject.lndo.site
-code .env
-
 # Start the project
 lando start 
 
 # Download dependencies
 lando composer install -o
+
+# Edit .env file to match the new name set above, example: 
+# DRUSH_OPTIONS_URI=https://myniceproject.lndo.site
+code .env
 
 # Install Drupal
 lando drush si --existing-config -y
