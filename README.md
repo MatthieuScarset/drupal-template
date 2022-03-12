@@ -1,18 +1,21 @@
 # Drupal project template
 
+Get a working Drupal website locally in minutes with this fine-tuned template.
+
 Based on the great [Drupal Composer project](https://github.com/drupal-composer/drupal-project).
 
-This is my fine-tuned template to quickly spin up a new Drupal project.
+## Requirement
 
-Requirements:
-- [VSCode](https://code.visualstudio.com/)
-- [Lando](https://docs.lando.dev/drupal/)
+Install [Lando](https://docs.lando.dev/drupal/) on your machine.
 
-Getting started:
+## Usage
+
+Click on the button _Use this template_ to generate your own project, then:
 
 ```bash
-git clone <repo> myniceproject
-cd myniceproject
+git clone git@github.com:<UsernameOrOrganization>/drupal-template.git myproject 
+
+cd myproject
 
 # Edit project name in base config files.
 code .lando.yml     # ->  name: myproject
@@ -29,5 +32,3 @@ lando drush si --existing-config -y
 ```
 
 Start to build things! 
-
-PS: Don't forget to enjoy life.
