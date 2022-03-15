@@ -28,7 +28,8 @@ lando start
 lando composer install -o
 
 # Install Drupal
-lando drush si --existing-config -y
+lando drush site:install --existing-config -y
+lando drush user:password admin admin
 ```
 
 Start to build things! 
