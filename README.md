@@ -20,6 +20,7 @@ cd myproject
 # Edit project name in base config files.
 code .lando.yml     # ->  name: myproject
 code .env.example   # ->  DRUSH_OPTIONS_URI=https://myproject.lndo.site
+git add . && git commit -m "Rename project" && git push 
 
 # Start the project
 lando start 
@@ -30,7 +31,7 @@ lando composer install -o
 # Install Drupal
 lando drush site:install --existing-config -y
 lando drush user:password admin admin
-lando drush user:login # -> CTRL + Left click to open your site :)
+lando drush user:login # -> Ctrl+Click the URL to open your site :)
 ```
 
 Start to build things! 
