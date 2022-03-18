@@ -1,12 +1,14 @@
 {
-    "name": "drupal-composer/drupal-project",
+    "name": "matthieuscarset/drupal-template",
     "description": "Project template for Drupal 9 projects with Composer",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
-            "name": "",
-            "role": ""
+            "name": "Matthieu Scarset",
+            "email": "m@matthieuscarset.com",
+            "homepage": "https://matthieuscarset.com",
+            "role": "chicken trainer"
         }
     ],
     "repositories": [
