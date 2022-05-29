@@ -35,6 +35,7 @@ $config['system.performance']['fast_404']['html'] = '<!DOCTYPE html><html><head>
 $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
 
 $settings['trusted_host_patterns'] = [
+  '^localhost$',
   '^lndo\.site$',
   '^.+\.lndo\.site$',
 ];
@@ -73,9 +74,10 @@ $settings['rebuild_access'] = TRUE;
 $settings['skip_permissions_hardening'] = TRUE;
 
 $settings['config_exclude_modules'] = [
-  'devel',
-  'stage_file_proxy',
   'dblog',
+  'devel',
+  'devel_generate',
+  'stage_file_proxy',
   'views_ui',
 ];
 
