@@ -81,6 +81,15 @@ $settings['config_exclude_modules'] = [
   'views_ui',
 ];
 
+// Configuration split folders.
+$config_splits = [];
+$config_splits['local'] = TRUE;
+$config_splits['stage'] = FALSE;
+$config_splits['prod'] = FALSE;
+foreach ($config_splits as $config_split_id => $config_split_status) {
+  $config["config_split.config_split.$config_split_id"]['status'] = $config_split_status;
+}
+
 // Local settings.
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
