@@ -1,4 +1,4 @@
-name: drupal-template
+name: myproject
 recipe: drupal9
 services:
   appserver:
