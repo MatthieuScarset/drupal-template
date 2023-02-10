@@ -28,6 +28,4 @@ module:
   minimal: 1000
 theme:
   claro: 0
-  stable: 0
-  project: 0
 profile: minimal

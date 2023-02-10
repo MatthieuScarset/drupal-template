@@ -1,5 +1,5 @@
 name: myproject
-recipe: drupal9
+recipe: drupal10
 services:
   appserver:
     webroot: web
