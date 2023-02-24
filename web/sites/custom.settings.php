@@ -4,16 +4,30 @@
 
 // Default Drupal settings.
 $databases = [];
+
 $databases['default']['default'] = [
   'database' => getenv('DB_NAME'),
   'username' => getenv('DB_USER'),
   'password' => getenv('DB_PASS'),
   'host' => getenv('DB_HOST'),
   'port' => getenv('DB_PORT'),
-  'driver' => 'mysql',
+  'driver' => getenv('DB_DRIVER') ?? 'mysql',
   'prefix' => '',
   'collation' => 'utf8mb4_general_ci',
 ];
+
+// SQLite. Because speed matters.
+// If selected, you need to install your site throught the UI.
+// e.g. https://drupal-openai.lndo.site/install.php
+if (getenv('DB_DRIVER') == 'sqlite') {
+  $databases['default']['default'] = [
+    'database' => 'sites/default/files/.ht.sqlite',
+    'prefix' => '',
+    'namespace' => 'Drupal\\sqlite\\Driver\\Database\\sqlite',
+    'driver' => 'sqlite',
+    'autoload' => 'core/modules/sqlite/src/Driver/Database/sqlite/',
+  ];
+}
 
 $settings['config_sync_directory'] = '../config/sync';
 $settings['hash_salt'] = file_get_contents($app_root . '/' . $site_path . '/salt.txt');
