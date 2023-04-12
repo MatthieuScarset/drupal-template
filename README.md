@@ -10,12 +10,13 @@ Install [Lando](https://docs.lando.dev/drupal/) on your machine.
 
 ## Usage
 
-Click on the button _Use this template_ to generate your own project, then:
-
 ```bash
-git clone git@github.com:<UsernameOrOrganization>/drupal-template.git myproject
+git clone https://github.com/MatthieuScarset/drupal-template.git myproject
 
 cd myproject
+
+# Delete git reference.
+rm -rf .git/
 
 # Replace the project name (i.e. 'myproject').
 code .env.example    # ->  DRUSH_OPTIONS_URI=https://myproject.lndo.site
@@ -25,7 +26,7 @@ code .lando.yml      # ->  name: myproject
 cp .env.example .env
 
 # Commit your changes
-git add . && git commit -m "Rename project" && git push
+git init && git add . && git commit -m "Init project"
 
 # Start the project
 lando start
@@ -39,4 +40,4 @@ lando drush user:password admin admin
 lando drush user:login # -> Ctrl+Click the URL to open your site :)
 ```
 
-Start to build things!
+Let's take over the world now!
