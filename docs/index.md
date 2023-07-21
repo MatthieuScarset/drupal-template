@@ -2,24 +2,43 @@
 
 Requirements:
 
-- [VSCode](https://code.visualstudio.com/)
 - [Lando](https://docs.lando.dev/drupal/)
+
+
+Recommandations:
+
+- [VSCode](https://code.visualstudio.com/)
 
 Installation:
 
 ```bash
-git clone <repo> myniceproject
-cd myniceproject
-lando start 
+git clone https://github.com/MatthieuScarset/drupal-template.git myproject
+
+cd myproject
+
+# Delete git references.
+rm -rf .git/
+
+# Replace the project name.
+code .lando.yml      # ->  name: myproject
+code .env.example    # ->  DRUSH_OPTIONS_URI=https://myproject.lndo.site
+
+# Create your env file now
+cp .env.example .env
+
+# Commit your changes
+git init && git add . && git commit -m "Init project"
+
+# Start the project
+lando start
+
+# Download dependencies
 lando composer install -o
-# Edit your project's name.
-# Ex: "name: myniceproject"
-code .lando.yml
-# Edit DRUSH_OPTIONS_URI to match the custom project's name set above.
-# Ex: "DRUSH_OPTIONS_URI=https://myniceproject.lndo.site"
-code .env
-# Install Drupal with minimal configuration
-lando drush site-install --existing-config -y
+
+# Install Drupal
+lando drush site:install --existing-config -y
+lando drush user:password admin admin
+lando drush user:login # -> Ctrl+Click the URL to open your site :)
 ```
 
 Helpful commands:
@@ -30,14 +49,14 @@ lando info
 
 # Enter the app container to run commands.
 lando ssh
-|__ www-data@5520c27c4bb0:/app$ ./vendor/bin/drush cache-rebuild
-|__ www-data@5520c27c4bb0:/app$ exit # or CTRL+D
+|__ www-data@xxx:/app$ ./vendor/bin/drush cache-rebuild
+|__ www-data@xxx:/app$ exit # or CTRL+D
 
-# Run Drush commands.
-lando drush php
-lando drush cache-rebuild
-lando drush core-status
-lando drush config-export
-lando drush config-import
-lando drush en devel stage_file_proxy -y
+# Common Drush commands
+lando drush core-status # check current installation
+lando drush cache-rebuild # clear caches
+lando drush config-export # export config changes to codebase
+lando drush config-import # import config changes to database
+lando drush en mymodule # enable module(s)
+lando drush php # interactive PHP CLI 
 ```

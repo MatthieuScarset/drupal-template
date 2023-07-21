@@ -40,4 +40,22 @@ lando drush user:password admin admin
 lando drush user:login # -> Ctrl+Click the URL to open your site :)
 ```
 
-Let's take over the world now!
+Helpful commands:
+
+```bash
+# Get local environment info (e.g. your site's URL)
+lando info
+
+# Enter the app container to run commands.
+lando ssh
+|__ www-data@xxx:/app$ ./vendor/bin/drush cache-rebuild
+|__ www-data@xxx:/app$ exit # or CTRL+D
+
+# Common Drush commands
+lando drush core-status # check current installation
+lando drush cache-rebuild # clear caches
+lando drush config-export # export config changes to codebase
+lando drush config-import # import config changes to database
+lando drush en mymodule # enable module(s)
+lando drush php # interactive PHP CLI 
+```
