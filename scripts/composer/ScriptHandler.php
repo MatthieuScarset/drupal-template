@@ -127,7 +127,7 @@ class ScriptHandler {
 
     // Execute the process with all arguments.
     $args = $event->getArguments();
-    $process_args = [$binPath] + $args;
+    $process_args = array_merge([$binPath], $args);
     $process = new Process($process_args);
     $process->run();
 
