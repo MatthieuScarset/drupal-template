@@ -1,99 +1,112 @@
 {
-    "name": "matthieuscarset/drupal-template",
-    "description": "Project template for Drupal 9 projects with Composer",
-    "type": "project",
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "Matthieu Scarset",
-            "email": "m@matthieuscarset.com",
-            "homepage": "https://matthieuscarset.com",
-            "role": "chicken trainer"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        }
-    ],
-    "require": {
-        "php": ">=8.1",
-        "composer/installers": "^2.1",
-        "cweagans/composer-patches": "^1.7",
-        "drupal/core-composer-scaffold": "^10.0.0",
-        "drupal/core-recommended": "^10.0.0",
-        "drush/drush": "^11.4.0",
-        "vlucas/phpdotenv": "^5.1",
-        "webflo/drupal-finder": "^1.2",
-        "drupal/config_ignore": "^2.3",
-        "drupal/config_split": "^1.7",
-        "drupal/core-project-message": "^10",
-        "drupal/shield": "^1.7"
-    },
-    "require-dev": {
-        "drupal/core-dev": "^10",
-        "drupal/devel": "^5.1"
-    },
-    "conflict": {
-        "drupal/drupal": "*"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "discard-changes": true,
-        "sort-packages": true,
-        "allow-plugins": {
-            "composer/installers": true,
-            "cweagans/composer-patches": true,
-            "drupal/core-composer-scaffold": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "drupal/core-project-message": true,
-            "phpstan/extension-installer": true
-        }
-    },
-    "autoload": {
-        "classmap": [
-            "scripts/composer/ScriptHandler.php"
-        ],
-        "files": ["load.environment.php"]
-    },
-    "scripts": {
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion",
-            "cp -n .env.example .env",
-            "cp -n web/sites/custom.settings.php web/sites/default/settings.php",
-            "echo $RANDOM | md5sum | head -c 20 > web/sites/default/salt.txt"
-        ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ]
-    },
-    "extra": {
-        "drupal-scaffold": {
-            "locations": {
-                "web-root": "web/"
-            }
-        },
-        "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/contrib/{$name}": ["type:drupal-module"],
-            "web/profiles/contrib/{$name}": ["type:drupal-profile"],
-            "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
-        },
-        "composer-exit-on-patch-failure": true,
-        "patchLevel": {
-            "drupal/core": "-p2"
-        },
-        "patches": {
-        }
+  "name": "matthieuscarset/drupal-template",
+  "description": "Project template for Drupal 9 projects with Composer",
+  "type": "project",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Matthieu Scarset",
+      "email": "m@matthieuscarset.com",
+      "homepage": "https://matthieuscarset.com",
+      "role": "chicken trainer"
     }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+    "composer/installers": "^2.1",
+    "cweagans/composer-patches": "^1.7",
+    "drupal/core-composer-scaffold": "^10.0.0",
+    "drupal/core-recommended": "^10.0.0",
+    "drush/drush": "^11.4.0",
+    "vlucas/phpdotenv": "^5.1",
+    "webflo/drupal-finder": "^1.2",
+    "drupal/config_ignore": "^2.3",
+    "drupal/config_split": "^1.7",
+    "drupal/core-project-message": "^10",
+    "drupal/shield": "^1.7"
+  },
+  "require-dev": {
+    "drupal/core-dev": "^10",
+    "drupal/devel": "^5.1"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "discard-changes": true,
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "drupal/core-composer-scaffold": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "drupal/core-project-message": true,
+      "phpstan/extension-installer": true
+    }
+  },
+  "autoload": {
+    "classmap": [
+      "scripts/composer/ScriptHandler.php"
+    ],
+    "files": [
+      "load.environment.php"
+    ]
+  },
+  "scripts": {
+    "pre-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion",
+      "cp -n .env.example .env",
+      "cp -n web/sites/custom.settings.php web/sites/default/settings.php",
+      "echo $RANDOM | md5sum | head -c 20 > web/sites/default/salt.txt"
+    ],
+    "pre-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "post-install-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "post-update-cmd": [
+      "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ]
+  },
+  "extra": {
+    "drupal-scaffold": {
+      "locations": {
+        "web-root": "web/"
+      }
+    },
+    "installer-paths": {
+      "web/core": [
+        "type:drupal-core"
+      ],
+      "web/libraries/{$name}": [
+        "type:drupal-library"
+      ],
+      "web/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "web/profiles/contrib/{$name}": [
+        "type:drupal-profile"
+      ],
+      "web/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "drush/Commands/contrib/{$name}": [
+        "type:drupal-drush"
+      ]
+    },
+    "composer-exit-on-patch-failure": true,
+    "patchLevel": {
+      "drupal/core": "-p2"
+    },
+    "patches": {}
+  }
 }
