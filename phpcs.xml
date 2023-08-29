@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="phpcs-standard">
   <description>Codestyle ruleset for Drupal</description>
+  <config name="drupal_core_version" value="10"/>
 
   <!-- Colors messes up the log file -->
   <!-- Use it in CLI if you want: `./vendor/bin/phpcs =-colors` -->
