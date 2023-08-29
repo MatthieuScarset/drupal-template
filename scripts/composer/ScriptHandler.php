@@ -13,9 +13,16 @@ use Drupal\Core\Site\Settings;
 use DrupalFinder\DrupalFinder;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Path;
+use Symfony\Component\Process\Process;
 
 class ScriptHandler {
 
+  /**
+   * Generate missing base files such as setting files, salt and dotenv.
+   * 
+   * @param \Composer\Script\Event $event
+   *   The event.
+   */
   public static function createRequiredFiles(Event $event) {
     $fs = new Filesystem();
     $drupalFinder = new DrupalFinder();
@@ -30,9 +37,9 @@ class ScriptHandler {
 
     // Required for unit testing
     foreach ($dirs as $dir) {
-      if (!$fs->exists($drupalRoot . '/'. $dir)) {
-        $fs->mkdir($drupalRoot . '/'. $dir);
-        $fs->touch($drupalRoot . '/'. $dir . '/.gitkeep');
+      if (!$fs->exists($drupalRoot . '/' . $dir)) {
+        $fs->mkdir($drupalRoot . '/' . $dir);
+        $fs->touch($drupalRoot . '/' . $dir . '/.gitkeep');
       }
     }
 
@@ -90,11 +97,66 @@ class ScriptHandler {
     // it is new enough, just display a warning.
     if ($version === '@package_version@' || $version === '@package_branch_alias_version@') {
       $io->writeError('<warning>You are running a development version of Composer. If you experience problems, please update Composer to the latest stable version.</warning>');
-    }
-    elseif (Comparator::lessThan($version, '1.0.0')) {
+    } elseif (Comparator::lessThan($version, '1.0.0')) {
       $io->writeError('<error>Drupal-project requires Composer version 1.0.0 or higher. Please update your Composer before continuing</error>.');
       exit(1);
     }
   }
 
+  /**
+   * Helper method to run any executable available in vendor/bin.
+   * 
+   * Process output is logged under logs/{$exec}.log
+   * 
+   * @param \Composer\Script\Event $event
+   *   The event.
+   * @param string $exec
+   *   A given executable file name.
+   */
+  protected static function runExec(Event $event, string $exec) {
+    $io = $event->getIO();
+    $fs = new Filesystem();
+    $drupalFinder = new DrupalFinder();
+    $drupalFinder->locateRoot(getcwd());
+    $binPath = $drupalFinder->getVendorDir() . "/bin/$exec";
+
+    if (!$fs->exists($binPath)) {
+      $io->write("Missing executable: $binPath");
+      return;
+    }
+
+    // Execute the process with all arguments.
+    $args = $event->getArguments();
+    $process_args = [$binPath] + $args;
+    $process = new Process($process_args);
+    $process->run();
+
+    $logPath = $drupalFinder->getComposerRoot() . '/logs';
+    $logFilename = $logPath . '/' . $exec . '.log';
+    $fs->touch($logFilename);
+    file_put_contents($logFilename, $process->getOutput());
+
+    $io->write('Code fix completed.');
+    $io->write("See log: $logFilename");
+  }
+
+  /**
+   * Handler our custom composer script to run PHPCBF.
+   * 
+   * @param \Composer\Script\Event $event
+   *   The event.
+   */
+  public static function codeFix(Event $event) {
+    self::runExec($event, 'phpcbf');
+  }
+
+  /**
+   * Handler our custom composer script to run PHPCS.
+   * 
+   * @param \Composer\Script\Event $event
+   *   The event.
+   */
+  public static function codeCheck(Event $event) {
+    self::runExec($event, 'phpcs');
+  }
 }

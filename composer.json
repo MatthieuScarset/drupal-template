@@ -76,6 +76,12 @@
     ],
     "post-update-cmd": [
       "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
+    ],
+    "code-fix": [
+      "DrupalProject\\composer\\ScriptHandler::codeFix"
+    ],
+    "code-check": [
+      "DrupalProject\\composer\\ScriptHandler::codeCheck"
     ]
   },
   "extra": {

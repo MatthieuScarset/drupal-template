@@ -57,5 +57,13 @@ lando drush cache-rebuild # clear caches
 lando drush config-export # export config changes to codebase
 lando drush config-import # import config changes to database
 lando drush en mymodule # enable module(s)
-lando drush php # interactive PHP CLI 
+lando drush php # interactive PHP CLI
+
+# Composer commands.
+lando composer code-fix # fix/format files with uncommitted changes...
+lando composer code-fix -- web/themes/custom/project/ # ...or specify a folder
+lando composer code-fix -- web/modules/custom/mymodule/mymodule.module # ...or a file
+lando composer code-check # log coding standards issues
+lando composer code-check -- themes/custom/mytheme # ...or specify a folder
+lando composer code-check -- themes/custom/mytheme/README.md # ...or a file
 ```
