@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
-         backupGlobals="false"
-         colors="true"
-         bootstrap="vendor/autoload.php"
-         verbose="true"
-        >
-    <testsuites>
-        <testsuite name="drupal-composer-project tests">
-            <directory>./test/</directory>
-        </testsuite>
-    </testsuites>
+<phpunit
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.1/phpunit.xsd"
+  backupGlobals="false"
+  colors="true"
+  bootstrap="web/core/tests/bootstrap.php"
+  verbose="true"
+  beStrictAboutTestsThatDoNotTestAnything="true"
+  beStrictAboutOutputDuringTests="true"
+  beStrictAboutChangesToGlobalState="true"
+  printerClass="\Drupal\Tests\Listeners\HtmlOutputPrinter">
+
+  <php>
+    <!-- Set error reporting to E_ALL. -->
+    <ini name="error_reporting" value="32767"/>
+    <!-- Do not limit the amount of memory tests take to run. -->
+    <ini name="memory_limit" value="-1"/>
+    <!-- Example SIMPLETEST_BASE_URL value: http://localhost -->
+    <env name="SIMPLETEST_BASE_URL" value="http://myproject.lndo.site"/>
+    <!-- Example SIMPLETEST_DB value: mysql://username:password@localhost/databasename#table_prefix -->
+    <env name="SIMPLETEST_DB" value="sqlite://myproject.lndo.site/logs/simpletest/test.sqlite"/>
+    <!-- Example BROWSERTEST_OUTPUT_DIRECTORY value: /path/to/webroot/sites/simpletest/browser_output -->
+    <env name="BROWSERTEST_OUTPUT_DIRECTORY" value="/app/logs/simpletest/browser_output"/>
+  </php> 
 </phpunit>

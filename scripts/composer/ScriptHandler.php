@@ -113,7 +113,7 @@ class ScriptHandler {
    * @param string $exec
    *   A given executable file name.
    */
-  protected static function runExec(Event $event, string $exec) {
+  protected static function runExec(Event $event, string $exec, array $args = []) {
     $io = $event->getIO();
     $fs = new Filesystem();
     $drupalFinder = new DrupalFinder();
@@ -126,7 +126,7 @@ class ScriptHandler {
     }
 
     // Execute the process with all arguments.
-    $args = $event->getArguments();
+    $args = array_merge($args, $event->getArguments());
     $process_args = array_merge([$binPath], $args);
     $process = new Process($process_args);
     $process->run();
@@ -136,7 +136,7 @@ class ScriptHandler {
     $fs->touch($logFilename);
     file_put_contents($logFilename, $process->getOutput());
 
-    $io->write('Code fix completed.');
+    $io->write('Task completed.');
     $io->write("See log: $logFilename");
   }
 
@@ -158,5 +158,15 @@ class ScriptHandler {
    */
   public static function codeCheck(Event $event) {
     self::runExec($event, 'phpcs');
+  }
+
+  /**
+   * Handler our custom composer script to run PHPSTAN.
+   * 
+   * @param \Composer\Script\Event $event
+   *   The event.
+   */
+  public static function codeScan(Event $event) {
+    self::runExec($event, 'phpstan', ['analyze']);
   }
 }

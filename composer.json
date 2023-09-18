@@ -21,15 +21,15 @@
     "php": ">=8.1",
     "composer/installers": "^2.1",
     "cweagans/composer-patches": "^1.7",
-    "drupal/core-composer-scaffold": "^10.0.0",
-    "drupal/core-recommended": "^10.0.0",
-    "drush/drush": "^11.4.0",
-    "vlucas/phpdotenv": "^5.1",
-    "webflo/drupal-finder": "^1.2",
     "drupal/config_ignore": "^2.3",
     "drupal/config_split": "^1.7",
+    "drupal/core-composer-scaffold": "^10.0.0",
     "drupal/core-project-message": "^10",
-    "drupal/shield": "^1.7"
+    "drupal/core-recommended": "^10.0.0",
+    "drupal/shield": "^1.7",
+    "drush/drush": "^11.4.0",
+    "vlucas/phpdotenv": "^5.1",
+    "webflo/drupal-finder": "^1.2"
   },
   "require-dev": {
     "drupal/coder": "^8.3",
@@ -82,6 +82,12 @@
     ],
     "code-check": [
       "DrupalProject\\composer\\ScriptHandler::codeCheck"
+    ],
+    "code-scan": [
+      "DrupalProject\\composer\\ScriptHandler::codeScan"
+    ],
+    "test": [
+      "DrupalProject\\composer\\ScriptHandler::runRest"
     ]
   },
   "extra": {
