@@ -3,8 +3,8 @@
   <description>Codestyle ruleset for Drupal</description>
   <config name="drupal_core_version" value="10"/>
 
-  <!-- Colors messes up the log file -->
-  <!-- Use it in CLI if you want: `./vendor/bin/phpcs =-colors` -->
+  <!-- Colors messes up the log file so, disabled by default -->
+  <!-- Use it in CLI if you want: `lando phpcs -\-colors` -->
   <!-- <arg name="colors"/> -->
 
   <!-- Specify standards. -->
