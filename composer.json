@@ -86,6 +86,9 @@
     "code-scan": [
       "DrupalProject\\composer\\ScriptHandler::codeScan"
     ],
+    "code-clean": [
+      "./scripts/drupal_thinner.sh"
+    ],    
     "test": [
       "DrupalProject\\composer\\ScriptHandler::runRest"
     ]
