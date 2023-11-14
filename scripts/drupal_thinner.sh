@@ -7,6 +7,11 @@
 # "Why should I do this? ¯\_(ツ)_/¯" you may ask...
 # To reduce your digital footprint by not deploying non-required things
 # to the world wide web.
+#
+# A standard Drupal project uses +/-230Mb of disk.
+# Remove tests directories and README* files... 
+# The project uses ~30% less space (+/- 160Mb):leaves:!
+# Morality: Safe the planet, no more test files on prod! 
 # ######################################################################
 #
 # Delete Drupal test directories.
