@@ -1,5 +1,5 @@
 # ######################################################################
-# Safe the planet, delete your test files!
+# Save the planet, delete your test files!
 #
 # This script is meant to delete unnecessary files and directories, 
 # usually Tests and informational content not used on production env.
@@ -11,7 +11,7 @@
 # A standard Drupal project uses +/-230Mb of disk.
 # Remove tests directories and README* files... 
 # The project uses ~30% less space (+/- 160Mb):leaves:!
-# Morality: Safe the planet, no more test files on prod! 
+# Morality: Save the planet, no more test files on prod! 
 # ######################################################################
 #
 # Delete Drupal test directories.
