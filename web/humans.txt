@@ -1,0 +1,34 @@
+/**
+ * @file
+ * Contains the list of humans involved in this project.
+ * @see https://humanstxt.org/humans.txt
+ */
+
+/* TEAM */
+Agency:       Your Company
+Contact:      contact [at] yourcompany.xyz
+From:         Some place, Earth
+
+Name:         Your Name
+Role:         Developer
+Contact:      your [at] email.com
+Site:         https://yoursite.com
+From:         Your place, Country
+
+/* SITE */
+Last update:  2024/01/01
+Language:     English
+Framework:    Drupal
+
+/* THANKS */
+Name:         Matthieu Scarset
+Role:         Author of the Drupal project template
+Contact:      m [at] matthieuscarset.com
+Site:         https://matthieuscarset.com
+From:         France
+
+
+/* SITE */
+Last update: 2024/01/01
+Language: English
+Framework: Drupal
