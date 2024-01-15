@@ -74,3 +74,10 @@ Be eco-friendly, reduce your digital footprint before deployment.
 chmod +x scripts/drupal_thinner.sh
 lando composer code-clean
 ```
+
+Be human and list all the people involved in your project: 
+
+```bash
+# Edit `web/humans.txt`.
+code humans.txt
+```
