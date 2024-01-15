@@ -68,3 +68,18 @@ lando composer code-check # log coding standards issues
 lando composer code-check -- themes/custom/mytheme # ...or specify a folder
 lando composer code-check -- themes/custom/mytheme/README.md # ...or a file
 ```
+
+Be eco-friendly, reduce your digital footprint before deployment:
+
+```bash
+# Delete unncessary files and test directories.
+chmod +x scripts/drupal_thinner.sh
+lando composer code-clean
+```
+
+Be human and list all the people involved in your project: 
+
+```bash
+# Edit `web/humans.txt`.
+code humans.txt
+```
