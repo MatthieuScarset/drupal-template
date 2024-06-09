@@ -66,9 +66,6 @@ $settings['entity_update_backup'] = TRUE;
 $settings['migrate_node_migrate_type_classic'] = FALSE;
 
 // Development settings.
-assert_options(ASSERT_ACTIVE, TRUE);
-assert_options(ASSERT_EXCEPTION, TRUE);
-
 $settings['container_yamls'][] = DRUPAL_ROOT . '/sites/custom.services.yml';
 
 $config['system.logging']['error_level'] = 'verbose';
