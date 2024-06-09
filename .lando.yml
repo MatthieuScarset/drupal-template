@@ -1,8 +1,33 @@
 name: myproject
 recipe: drupal10
+config:
+  # Xdebug off by default.
+  # Use the tooling below to turn it on as needed.
+  xdebug: false
+
+# Disable access to your SSH keys by default.
+# @see https://docs.lando.dev/core/v3/ssh.html#customizing
+keys: false
+
 services:
   appserver:
     webroot: web
-    xdebug: debug
     config:
       php: .vscode/php.ini
+    overrides:
+      environment:
+        XDEBUG_MODE: 'debug,develop'
+    run:
+      - composer install -o
+
+tooling:
+  xdebug-on:
+    service: appserver
+    description: Enable xdebug for Apache.
+    cmd: rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && docker-php-ext-enable xdebug && /etc/init.d/apache2 reload && echo "Xdebug enabled"
+    user: root
+  xdebug-off:
+    service: appserver
+    description: Disable xdebug for Apache.
+    cmd: rm -f /usr/local/etc/phprm /conf.d/docker-php-ext-xdebug.ini && /etc/init.d/apache2 reload && echo "Xdebug disabled"
+    user: root
