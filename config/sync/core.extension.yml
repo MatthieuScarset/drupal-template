@@ -3,7 +3,6 @@ _core:
 module:
   block: 0
   breakpoint: 0
-  config_filter: 0
   config_ignore: 0
   config_split: 0
   dynamic_page_cache: 0

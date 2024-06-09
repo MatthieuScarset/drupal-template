@@ -6,14 +6,15 @@ id: stage
 label: Stage
 description: ''
 weight: 0
+stackable: false
+no_patching: false
+storage: null
 folder: ../config/stage
 module:
   dblog: 0
   shield: 0
 theme: {  }
-blacklist:
+complete_list:
   - system.file
   - system.performance
-graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: true
+partial_list: {  }

@@ -6,6 +6,9 @@ id: prod
 label: Production
 description: ''
 weight: 0
+stackable: false
+no_patching: false
+storage: null
 folder: ../config/prod
 module:
   robotstxt: 0
@@ -13,11 +16,7 @@ module:
   s3fs: 0
   syslog: 0
 theme: {  }
-blacklist:
-  - kline_geolocation.settings
-  - mon_projet_fenetre.configurator.settings
+complete_list:
   - system.file
   - system.performance
-graylist: {  }
-graylist_dependents: true
-graylist_skip_equal: true
+partial_list: {  }
