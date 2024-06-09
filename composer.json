@@ -1,14 +1,13 @@
 {
   "name": "matthieuscarset/drupal-template",
-  "description": "Project template for Drupal 9 projects with Composer",
+  "description": "Project template for Drupal projects with Composer",
   "type": "project",
   "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Matthieu Scarset",
       "email": "m@matthieuscarset.com",
-      "homepage": "https://matthieuscarset.com",
-      "role": "chicken trainer"
+      "homepage": "https://matthieuscarset.com"
     }
   ],
   "repositories": [
@@ -21,20 +20,19 @@
     "php": ">=8.1",
     "composer/installers": "^2.1",
     "cweagans/composer-patches": "^1.7",
-    "drupal/config_ignore": "^2.3",
-    "drupal/config_split": "^1.7",
-    "drupal/core-composer-scaffold": "^10.0.0",
+    "drupal/config_ignore": "^3",
+    "drupal/config_split": "^2",
+    "drupal/core-composer-scaffold": "^10",
     "drupal/core-project-message": "^10",
-    "drupal/core-recommended": "^10.0.0",
-    "drupal/shield": "^1.7",
-    "drush/drush": "^11.4.0",
-    "vlucas/phpdotenv": "^5.1",
-    "webflo/drupal-finder": "^1.2"
+    "drupal/core-recommended": "^10",
+    "drupal/shield": "^1",
+    "drush/drush": "^12",
+    "vlucas/phpdotenv": "^5",
+    "webflo/drupal-finder": "^1"
   },
   "require-dev": {
-    "drupal/coder": "^8.3",
-    "drupal/core-dev": "^10",
-    "drupal/devel": "^5.1"
+    "drupal/coder": "^8",
+    "drupal/core-dev": "^10"
   },
   "conflict": {
     "drupal/drupal": "*"
@@ -50,7 +48,8 @@
       "drupal/core-composer-scaffold": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "drupal/core-project-message": true,
-      "phpstan/extension-installer": true
+      "phpstan/extension-installer": true,
+      "php-http/discovery": true
     }
   },
   "autoload": {
@@ -88,7 +87,7 @@
     ],
     "code-clean": [
       "./scripts/drupal_thinner.sh"
-    ],    
+    ],
     "test": [
       "DrupalProject\\composer\\ScriptHandler::runRest"
     ]
