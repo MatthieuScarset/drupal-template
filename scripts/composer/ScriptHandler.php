@@ -19,7 +19,7 @@ class ScriptHandler {
 
   /**
    * Generate missing base files such as setting files, salt and dotenv.
-   * 
+   *
    * @param \Composer\Script\Event $event
    *   The event.
    */
@@ -43,19 +43,18 @@ class ScriptHandler {
       }
     }
 
-    // Prepare the settings file for installation
+    // Prepare the settings file for custom installation
+    if (!$fs->exists($drupalRoot . '/sites/default/settings.php') && $fs->exists($drupalRoot . '/sites/custom.settings.php')) {
+      $fs->copy($drupalRoot . '/sites/custom.settings.php', $drupalRoot . '/sites/default/settings.php');
+      $fs->chmod($drupalRoot . '/sites/default/settings.php', 0666);
+      $event->getIO()->write("Created a sites/default/settings.php file using custom template with chmod 0666");
+    }
+
+    // Prepare the settings file for default installation.
     if (!$fs->exists($drupalRoot . '/sites/default/settings.php') && $fs->exists($drupalRoot . '/sites/default/default.settings.php')) {
       $fs->copy($drupalRoot . '/sites/default/default.settings.php', $drupalRoot . '/sites/default/settings.php');
-      require_once $drupalRoot . '/core/includes/bootstrap.inc';
-      require_once $drupalRoot . '/core/includes/install.inc';
-      new Settings([]);
-      $settings['settings']['config_sync_directory'] = (object) [
-        'value' => Path::makeRelative($drupalFinder->getComposerRoot() . '/config/sync', $drupalRoot),
-        'required' => TRUE,
-      ];
-      drupal_rewrite_settings($settings, $drupalRoot . '/sites/default/settings.php');
       $fs->chmod($drupalRoot . '/sites/default/settings.php', 0666);
-      $event->getIO()->write("Created a sites/default/settings.php file with chmod 0666");
+      $event->getIO()->write("Created a sites/default/settings.php file using default template with chmod 0666");
     }
 
     // Create the files directory with chmod 0777
@@ -68,46 +67,10 @@ class ScriptHandler {
   }
 
   /**
-   * Checks if the installed version of Composer is compatible.
-   *
-   * Composer 1.0.0 and higher consider a `composer install` without having a
-   * lock file present as equal to `composer update`. We do not ship with a lock
-   * file to avoid merge conflicts downstream, meaning that if a project is
-   * installed with an older version of Composer the scaffolding of Drupal will
-   * not be triggered. We check this here instead of in drupal-scaffold to be
-   * able to give immediate feedback to the end user, rather than failing the
-   * installation after going through the lengthy process of compiling and
-   * downloading the Composer dependencies.
-   *
-   * @see https://github.com/composer/composer/pull/5035
-   */
-  public static function checkComposerVersion(Event $event) {
-    $composer = $event->getComposer();
-    $io = $event->getIO();
-
-    $version = $composer::VERSION;
-
-    // The dev-channel of composer uses the git revision as version number,
-    // try to the branch alias instead.
-    if (preg_match('/^[0-9a-f]{40}$/i', $version)) {
-      $version = $composer::BRANCH_ALIAS_VERSION;
-    }
-
-    // If Composer is installed through git we have no easy way to determine if
-    // it is new enough, just display a warning.
-    if ($version === '@package_version@' || $version === '@package_branch_alias_version@') {
-      $io->writeError('<warning>You are running a development version of Composer. If you experience problems, please update Composer to the latest stable version.</warning>');
-    } elseif (Comparator::lessThan($version, '1.0.0')) {
-      $io->writeError('<error>Drupal-project requires Composer version 1.0.0 or higher. Please update your Composer before continuing</error>.');
-      exit(1);
-    }
-  }
-
-  /**
    * Helper method to run any executable available in vendor/bin.
-   * 
+   *
    * Process output is logged under logs/{$exec}.log
-   * 
+   *
    * @param \Composer\Script\Event $event
    *   The event.
    * @param string $exec
@@ -142,7 +105,7 @@ class ScriptHandler {
 
   /**
    * Handler our custom composer script to run PHPCBF.
-   * 
+   *
    * @param \Composer\Script\Event $event
    *   The event.
    */
@@ -152,7 +115,7 @@ class ScriptHandler {
 
   /**
    * Handler our custom composer script to run PHPCS.
-   * 
+   *
    * @param \Composer\Script\Event $event
    *   The event.
    */
@@ -162,11 +125,56 @@ class ScriptHandler {
 
   /**
    * Handler our custom composer script to run PHPSTAN.
-   * 
+   *
    * @param \Composer\Script\Event $event
    *   The event.
    */
   public static function codeScan(Event $event) {
     self::runExec($event, 'phpstan', ['analyze']);
+  }
+
+  /**
+   * Handler our custom composer script to clean PHPSTAN.
+   *
+   * @param \Composer\Script\Event $event
+   *   The event.
+   */
+  public static function codeClean(Event $event) {
+    $io = $event->getIO();
+    $io->write('Work in progress.');
+    /*
+    # ######################################################################
+    # Save the planet, delete your test files!
+    #
+    # This script is meant to delete unnecessary files and directories,
+    # usually Tests and informational content not used on production env.
+    #
+    # "Why should I do this? ¯\_(ツ)_/¯" you may ask...
+    # To reduce your digital footprint by not deploying non-required things
+    # to the world wide web.
+    #
+    # A standard Drupal project uses +/-230Mb of disk.
+    # Remove tests directories and README* files...
+    # The project uses ~30% less space (+/- 160Mb):leaves:!
+    # Morality: Save the planet, no more test files on prod!
+    # ######################################################################
+    #
+    # Delete Drupal test directories.
+    # https://unix.stackexchange.com/a/89937
+    find . -type d -name tests -exec rm -rf {} +
+    # Delete README files.
+    find . -type f -name 'README*' -delete
+    find . -type f -name 'CHANGELOG*' -delete
+    # Delete patch records.
+    find . -type f -name 'PATCHES.txt' -delete
+    # Delete markdown files except licenses.
+    find web -type f -name "*.md" -not -name "LICENSE*" -delete
+    # Delete txt files except humans and licenses.
+    find web -type f -name "*.txt" -not -name "salt*" -not -name "humans*" -not -name "LICENSE*" -not -name "COPYRIGHT*" -delete
+    # Delete testing and demo profiles.
+    find web/core/profiles -type d -name 'testing*' -exec rm -rf {} +
+    find web/core/profiles -type d -name 'nightwatch_testing' -exec rm -rf {} +
+    find web/core/profiles -type d -name 'demo_umami' -exec rm -rf {} +
+    */
   }
 }

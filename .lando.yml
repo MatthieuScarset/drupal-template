@@ -1,5 +1,5 @@
 name: myproject
-recipe: drupal10
+recipe: drupal11
 config:
   # Xdebug off by default.
   # Use the tooling below to turn it on as needed.
